@@ -2,6 +2,8 @@
 
 sudo apt update && sudo apt install nginx python3-certbot-nginx -y
 
+sudo certbot --nginx -d skyline-rt.com -d www.skyline-rt.com --redirect --agree-tos --no-eff-email -m nk@skyline-rt.com
+
 sudo tee /etc/nginx/sites-available/skyline-rt.com > /dev/null <<'EOT'
 server {
     listen 80;
@@ -25,7 +27,5 @@ EOT
 sudo ln -s /etc/nginx/sites-available/skyline-rt.com /etc/nginx/sites-enabled/
 
 sudo nginx -t && sudo systemctl restart nginx
-
-sudo certbot --nginx -d skyline-rt.com -d www.skyline-rt.com --redirect --agree-tos --no-eff-email -m nk@skyline-rt.com
 
 sudo systemctl reload nginx
